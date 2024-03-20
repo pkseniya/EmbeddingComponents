@@ -19,7 +19,15 @@ All the experiments are issued in the form of pretty self-explanatory jupyter no
 
 - `notebooks/fvalue.ipynb` &ndash; getting feature importance of embeddings with ANOVA F-value [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/fvalue.ipynb)
 ## Results
-[TBD]
+### Outlier dimensions perform better than random features on probing tasks
+<p align="center"><img src="pics/Test_accuracy.png" width="700" /></p>
+
+### Several outlier dimensions with high feature importance for each task
+<p align="center"><img src="pics/BigramShift.png" width="700" /></p>
+
+### Few distinctive outlier dimensions with syntactic or semantic information
+<p align="center"><img src="pics/TaskIntersection.png" width="700" /></p>
+
 ## References
 ### Analysing the Importance of LLMs Embeddings' Components on Probing Linguistic Tasks
 Contact: [petrushina.ke@phystech.edu](mailto:petrushina.ke@phystech.edu)
