@@ -10,7 +10,7 @@ def get_feature_importances(task):
     logreg.fit(StandardScaler().fit_transform(dataset['train']['X']), dataset['train']['y'])
     
     with open(f'logreg/{task}.npy', 'wb') as f:
-        np.save(f, np.abs(model.coef_))
+        np.save(f, np.abs(logreg.coef_))
 
 if __name__ == '__main__':
     tasks = ['Length', 'WordContent', 'Depth', 'TopConstituents', 
