@@ -41,6 +41,8 @@ def batcher(params, batch):
 
 
 # Set params for SentEval
+params_senteval = {'task_path': PATH_TO_DATA, 'usepytorch': False, 'kfold': 5, 'load_embs': True,
+                   'embs_path': '/workspace/EmbeddingComponents/', 'use_boosting': False}
 params_senteval['classifier'] = {'nhid': 0, 'optim': 'rmsprop', 'batch_size': 128,
                                  'tenacity': 3, 'epoch_size': 2}
 
@@ -50,8 +52,9 @@ logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.DEBUG)
 if __name__ == "__main__":
     se = senteval.engine.SE(params_senteval, batcher, prepare)
     transfer_tasks = ['Length', 'WordContent', 'Depth', 'TopConstituents',
-                        'BigramShift', 'Tense', 'SubjNumber', 'ObjNumber',
-                        'OddManOut', 'CoordinationInversion']
+                      'BigramShift', 'Tense', 'SubjNumber', 'ObjNumber']# 'OddManOut', 'CoordinationInversion']
 
+    transfer_tasks = ['OddManOut', 'CoordinationInversion']
+    
     results = se.eval(transfer_tasks)
     print(results)

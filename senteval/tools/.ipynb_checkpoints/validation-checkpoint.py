@@ -208,29 +208,29 @@ class SplitClassifier(object):
                [2**t for t in range(-2, 4, 1)]
         if self.noreg:
             regs = [1e-9 if self.usepytorch else 1e9]
-            
         scores = []
-        for reg in regs:
-            if self.usepytorch:
-                clf = MLP(self.classifier_config, inputdim=self.featdim,
-                          nclasses=self.nclasses, l2reg=reg,
-                          seed=self.seed, cudaEfficient=self.cudaEfficient)
-
-                # TODO: Find a hack for reducing nb epoches in SNLI
-                clf.fit(self.X['train'], self.y['train'],
-                        validation_data=(self.X['valid'], self.y['valid']))
-            else:
-                clf = LogisticRegression(C=reg, random_state=self.seed)
-                clf.fit(self.X['train'], self.y['train'])
-            scores.append(round(100*clf.score(self.X['valid'],
-                                self.y['valid']), 2))
-        logging.info([('reg:'+str(regs[idx]), scores[idx])
-                      for idx in range(len(scores))])
-        optreg = regs[np.argmax(scores)]
-        devaccuracy = np.max(scores)
-        logging.info('Validation : best param found is reg = {0} with score \
-            {1}'.format(optreg, devaccuracy))
-        clf = LogisticRegression(C=optreg, random_state=self.seed)
+        if not self.config['params']['use_boosting']:
+            for reg in regs:
+                if self.usepytorch:
+                    clf = MLP(self.classifier_config, inputdim=self.featdim,
+                              nclasses=self.nclasses, l2reg=reg,
+                              seed=self.seed, cudaEfficient=self.cudaEfficient)
+                    
+                    # TODO: Find a hack for reducing nb epoches in SNLI
+                    clf.fit(self.X['train'], self.y['train'],
+                            validation_data=(self.X['valid'], self.y['valid']))
+                else:
+                    clf = LogisticRegression(C=reg, random_state=self.seed)
+                    clf.fit(self.X['train'], self.y['train'])
+                scores.append(round(100*clf.score(self.X['valid'],
+                                    self.y['valid']), 2))
+            logging.info([('reg:'+str(regs[idx]), scores[idx])
+                          for idx in range(len(scores))])
+            optreg = regs[np.argmax(scores)]
+            devaccuracy = np.max(scores)
+            logging.info('Validation : best param found is reg = {0} with score \
+                {1}'.format(optreg, devaccuracy))
+            clf = LogisticRegression(C=optreg, random_state=self.seed)
         logging.info('Evaluating...')
         if self.usepytorch:
             clf = MLP(self.classifier_config, inputdim=self.featdim,
@@ -240,13 +240,21 @@ class SplitClassifier(object):
             # TODO: Find a hack for reducing nb epoches in SNLI
             clf.fit(self.X['train'], self.y['train'],
                     validation_data=(self.X['valid'], self.y['valid']))
+        elif self.config['params']['use_boosting']:
+            clf = CatBoostClassifier(task_type='GPU', devices='2')
+            clf.fit(self.X['train'], self.y['train'], eval_set=Pool(self.X['valid'], self.y['valid']))
+            imps = clf.feature_importances_
+            np.save('CatBoostFeatures/' + self.config['task'] + '.npy', imps)    
+            devaccuracy = 100500
         else:
             clf = LogisticRegression(C=optreg, random_state=self.seed)
             clf.fit(self.X['train'], self.y['train'])
+            imps = clf.coef_
+            np.save('LogRegFeatures/' + self.config['task'] + '.npy', imps)
+            
+        
+        #logging.info(f'Feature Importances shape: {self.feature_importances.shape}')
 
         testaccuracy = clf.score(self.X['test'], self.y['test'])
         testaccuracy = round(100*testaccuracy, 2)
-
         return devaccuracy, testaccuracy
-
-        return clf

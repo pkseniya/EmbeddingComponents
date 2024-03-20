@@ -18,9 +18,10 @@ import json
 import logging
 import numpy as np
 
-
+import datasets
 from datasets import Dataset, DatasetDict
 from tqdm import tqdm
+from sklearn.preprocessing import StandardScaler
 
 from senteval.tools.validation import SplitClassifier
 
@@ -59,46 +60,61 @@ class PROBINGEval(object):
             for i, y in enumerate(self.task_data[split]['y']):
                 self.task_data[split]['y'][i] = self.tok2label[y]
 
-
-    def run(self, params, batcher, train_clf=False):
+    def run(self, params, batcher, train_clf=True):
         task_embed = {'train': {}, 'dev': {}, 'test': {}}
         bsize = params.batch_size
-        logging.info('Computing embeddings for train/dev/test')
-        for key in self.task_data:
-            # Sort to reduce padding
-            sorted_data = sorted(zip(self.task_data[key]['X'],
-                                     self.task_data[key]['y']),
-                                 key=lambda z: (len(z[0]), z[1]))
-            self.task_data[key]['X'], self.task_data[key]['y'] = map(list, zip(*sorted_data))
+        scaler = StandardScaler()
 
-            task_embed[key]['X'] = []
-            task_embed[key]['sent'] = []
-            for ii in tqdm(range(0, len(self.task_data[key]['y']), bsize)):
-                batch = self.task_data[key]['X'][ii:ii + bsize]
-                embeddings = batcher(params, batch)
-                task_embed[key]['X'].append(embeddings)
-                task_embed[key]['sent'].extend([" ".join(sent) if sent != [] else ['.'] for sent in batch])
-
-            task_embed[key]['X'] = np.vstack(task_embed[key]['X'])
-            task_embed[key]['y'] = np.array(self.task_data[key]['y'])
-        logging.info('Computed embeddings')
-
-        path = f'datasets/{self.task}.hf'
-        dataset = DatasetDict({key: Dataset.from_dict(task_embed[key]) for key in self.task_data})
-        dataset.save_to_disk(path)
-
-        logging.info(f'Saved to datasets/{path}')
-
+        if not params.load_embs:
+            logging.info('Computing embeddings for train/dev/test')
+            for key in self.task_data:
+                # Sort to reduce padding
+                sorted_data = sorted(zip(self.task_data[key]['X'],
+                                         self.task_data[key]['y']),
+                                     key=lambda z: (len(z[0]), z[1]))
+                self.task_data[key]['X'], self.task_data[key]['y'] = map(list, zip(*sorted_data))
+    
+                task_embed[key]['X'] = []
+                task_embed[key]['sent'] = []
+                for ii in tqdm(range(0, len(self.task_data[key]['y']), bsize)):
+                    batch = self.task_data[key]['X'][ii:ii + bsize]
+                    embeddings = batcher(params, batch)
+                    task_embed[key]['X'].append(embeddings)
+                    task_embed[key]['sent'].extend([" ".join(sent) if sent != [] else ['.'] for sent in batch])
+    
+                task_embed[key]['X'] = np.vstack(task_embed[key]['X'])
+                task_embed[key]['y'] = np.array(self.task_data[key]['y'])
+                    
+            logging.info('Computed embeddings')
+    
+            path = f'datasets/{self.task}.hf'
+            dataset = DatasetDict({key: Dataset.from_dict(task_embed[key]) for key in self.task_data})
+            dataset.save_to_disk(path)
+    
+            logging.info(f'Saved to datasets/{path}')
+        else:
+            embeds = datasets.load_from_disk(params.embs_path + f'{self.task}.hf')
+            for key in task_embed.keys():
+                task_embed[key]['X'] = np.array(embeds[key]['X'])
+                task_embed[key]['y'] = np.array(embeds[key]['y'])
+                
+                if key == 'train':
+                    task_embed[key]['X'] = scaler.fit_transform(task_embed[key]['X'])
+                else:
+                    task_embed[key]['X'] = scaler.transform(task_embed[key]['X'])
         
         if train_clf:
             config_classifier = {'nclasses': self.nclasses, 'seed': self.seed,
                                  'usepytorch': params.usepytorch,
-                                 'classifier': params.classifier}
+                                 'classifier': params.classifier, 
+                                 'params' : params}
 
             if self.task == "WordContent" and params.classifier['nhid'] > 0:
                 config_classifier = copy.deepcopy(config_classifier)
                 config_classifier['classifier']['nhid'] = 0
                 print(params.classifier['nhid'])
+
+            config_classifier['task'] = self.task
 
             clf = SplitClassifier(X={'train': task_embed['train']['X'],
                                      'valid': task_embed['dev']['X'],
