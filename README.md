@@ -9,13 +9,13 @@ This code is written in python. The dependencies are:
 
 ## Repository structure
 ### Experiments
-- `notebooks/outliers.ipynb` -- calculation of outlier dimensions of embeddings [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/outliers.ipynb)
+- `notebooks/outliers.ipynb` &ndash; calculation of outlier dimensions of embeddings [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/outliers.ipynb)
 
-- `notebooks/logreg.ipynb` -- getting feature importance of embeddings with logistic regression [![Open In Colab](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/logreg.ipynb)
+- `notebooks/logreg.ipynb` &ndash; getting feature importance of embeddings with logistic regression [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/logreg.ipynb)
 
-- `notebooks/shap.ipynb` -- getting feature importance of embeddings with shap and mlp [![Open In Colab](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/shap.ipynb)
+- `notebooks/shap.ipynb` &ndash; getting feature importance of embeddings with shap and mlp [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/shap.ipynb)
 
-- `notebooks/fvalue.ipynb` -- getting feature importance of embeddings with ANOVA F-value [![Open In Colab](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/fvalue.ipynb)
+- `notebooks/fvalue.ipynb` &ndash; getting feature importance of embeddings with ANOVA F-value [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/fvalue.ipynb)
 ## Results
 [TBD]
 ## References
