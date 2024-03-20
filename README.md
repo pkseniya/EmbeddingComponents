@@ -1,5 +1,5 @@
 # Analysing the Importance of LLMs Embeddings' Components on Probing Linguistic Tasks
-This repository contains the source code to reproduce experiments from the project for Skoltech Machine Learning course. 
+This repository contains the source code to reproduce experiments from the project for Skoltech Machine Learning course ([Paper](https://github.com/pkseniya/EmbeddingComponents/blob/main/paper/Analysing_the_Importance_of_LLMs_Embeddings__Components_on_Probing_Linguistic_Tasks.pdf), [Slides](https://github.com/pkseniya/EmbeddingComponents/blob/main/slides/slides.pdf)). 
 ## Setup
 This code is written in python. The dependencies are:
 
@@ -13,8 +13,6 @@ This code is written in python. The dependencies are:
 [TBD]
 ## References
 ### Analysing the Importance of LLMs Embeddings' Components on Probing Linguistic Tasks
-[Paper](https://github.com/pkseniya/EmbeddingComponents/blob/main/paper/Analysing_the_Importance_of_LLMs_Embeddings__Components_on_Probing_Linguistic_Tasks.pdf), [Slides](https://github.com/pkseniya/EmbeddingComponents/blob/main/slides/slides.pdf)
-
 Contact: [petrushina.ke@phystech.edu](mailto:petrushina.ke@phystech.edu)
-### Related work
+### Credits
 * [*SentEval: An Evaluation Toolkit for Universal Sentence Representations*](https://arxiv.org/abs/1803.05449)
