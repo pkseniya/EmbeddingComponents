@@ -13,8 +13,7 @@ This code is written in python. The dependencies are:
 [TBD]
 ## References
 ### Analysing the Importance of LLMs Embeddings' Components on Probing Linguistic Tasks
-Paper: [TBD]
-Slides: [TBD]
+[Paper](https://github.com/pkseniya/EmbeddingComponents/blob/main/paper/Analysing_the_Importance_of_LLMs_Embeddings__Components_on_Probing_Linguistic_Tasks.pdf), [Slides](https://github.com/pkseniya/EmbeddingComponents/blob/main/paper/slides.pdf)
 Contact: [petrushina.ke@phystech.edu](mailto:petrushina.ke@phystech.edu)
 ### Related work
 * [*SentEval: An Evaluation Toolkit for Universal Sentence Representations*](https://arxiv.org/abs/1803.05449)
