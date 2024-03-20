@@ -18,7 +18,6 @@ import json
 import logging
 import numpy as np
 
-
 from datasets import Dataset, DatasetDict
 from tqdm import tqdm
 
@@ -59,7 +58,6 @@ class PROBINGEval(object):
             for i, y in enumerate(self.task_data[split]['y']):
                 self.task_data[split]['y'][i] = self.tok2label[y]
 
-
     def run(self, params, batcher, train_clf=False):
         task_embed = {'train': {}, 'dev': {}, 'test': {}}
         bsize = params.batch_size
@@ -88,7 +86,6 @@ class PROBINGEval(object):
         dataset.save_to_disk(path)
 
         logging.info(f'Saved to datasets/{path}')
-
         
         if train_clf:
             config_classifier = {'nclasses': self.nclasses, 'seed': self.seed,

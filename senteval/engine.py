@@ -121,4 +121,3 @@ class SE(object):
         self.results = self.evaluation.run(self.params, self.batcher)
 
         return self.results
-        
