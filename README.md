@@ -11,6 +11,8 @@ All the experiments are issued in the form of pretty self-explanatory jupyter no
 ### Experiments
 - `notebooks/outliers.ipynb` &ndash; calculation of outlier dimensions of embeddings [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/outliers.ipynb)
 
+- `notebooks/outlier_vs_random_vs_all.ipynb` &ndash; comparing accuracues of logistic regression on all, outlier and random features [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/outlier_vs_random_vs_all.ipynb)
+
 - `notebooks/logreg.ipynb` &ndash; getting feature importance of embeddings with logistic regression [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/logreg.ipynb)
 
 - `notebooks/shap.ipynb` &ndash; getting feature importance of embeddings with shap and mlp [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/shap.ipynb)
