@@ -4,9 +4,9 @@ This repository contains the source code to reproduce experiments from the proje
 The implementation is on python and GPU-based. Tested with torch 2.2.1 and 1 Tesla T4 on Google Colab.
 
 Local setup:
-1. Clone this repository
+1. Clone this repository, for example, `git clone https://github.com/pkseniya/EmbeddingComponents.git`
 2. `pip install -r ./EmbeddingComponents/requirements.txt` &ndash; installing the required libraries  
-3. `pip install -e ./EmbeddingComponents/ &ndash; SentEval installation 
+3. `pip install -e ./EmbeddingComponents/ &ndash;` SentEval installation 
 ## Repository structure
 All the experiments are issued in the form of pretty self-explanatory jupyter notebooks (notebooks/). For convenience, the majority of the evaluation output is preserved. Auxilary source code is moved to .py (feature_importance/).
 ### Experiments
