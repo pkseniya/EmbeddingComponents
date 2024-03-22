@@ -11,3 +11,4 @@ seaborn==0.13.1
 shap==0.45.0
 torch==2.2.1
 transformers==4.38.2
+tqdm==4.66.2
