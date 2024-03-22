@@ -1,5 +1,7 @@
 # Analysing the Importance of LLMs Embeddings' Components on Probing Linguistic Tasks
 This repository contains the source code to reproduce experiments from the project for Skoltech Machine Learning course ([Paper](https://github.com/pkseniya/EmbeddingComponents/blob/main/paper/Analysing_the_Importance_of_LLMs_Embeddings__Components_on_Probing_Linguistic_Tasks.pdf), [Slides](https://github.com/pkseniya/EmbeddingComponents/blob/main/slides/slides.pdf)). 
+
+Large language models (LLMs) have helped researchers to achieve tremendous results in the field of NLP. However, work is still being done on their interpretability, part of which is contextualized embeddings from LLMs. Previous works demonstrated that some dimensions in LLMs' embeddings are important to the representational quality of these embeddings for task specific knowledge. In this study, we analyze components' importance of LLMs by probing on simple tasks. Our results suggest that several embeddings' dimensions are directly responsible for definite linguistic properties.
 ## Setup
 The implementation is on python and GPU-based. Tested with torch 2.2.1 and 1 Tesla T4 on Google Colab.
 
@@ -41,3 +43,5 @@ To plot feature importance vs deviation from the mean (outlierness of the compon
 Contact: [petrushina.ke@phystech.edu](mailto:petrushina.ke@phystech.edu)
 ### Credits
 * [*SentEval: An Evaluation Toolkit for Universal Sentence Representations*](https://arxiv.org/abs/1803.05449)
+* [*A Unified Approach to Interpreting Model Predictions*](https://proceedings.neurips.cc/paper_files/paper/2017/hash/8a20a8621978632d76c43dfd28b67767-Abstract.html)
+* [*RoBERTa: A Robustly Optimized BERT Pretraining Approach*](https://arxiv.org/abs/1907.11692)
