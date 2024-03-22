@@ -1,7 +1,12 @@
 # Analysing the Importance of LLMs Embeddings' Components on Probing Linguistic Tasks
 This repository contains the source code to reproduce experiments from the project for Skoltech Machine Learning course ([Paper](https://github.com/pkseniya/EmbeddingComponents/blob/main/paper/Analysing_the_Importance_of_LLMs_Embeddings__Components_on_Probing_Linguistic_Tasks.pdf), [Slides](https://github.com/pkseniya/EmbeddingComponents/blob/main/slides/slides.pdf)). 
 ## Setup
-The implementation is on python an GPU-based. Tested with `torch==2.2.1` and 1 Tesla T4 on Google Colab.
+The implementation is on python and GPU-based. Tested with torch 2.2.1 and 1 Tesla T4 on Google Colab.
+
+Local setup:
+1. Clone this repository
+2. `pip install -r ./EmbeddingComponents/requirements.txt` &ndash; installing the required libraries  
+3. `pip install -e ./EmbeddingComponents/ &ndash; SentEval installation 
 ## Repository structure
 All the experiments are issued in the form of pretty self-explanatory jupyter notebooks (notebooks/). For convenience, the majority of the evaluation output is preserved. Auxilary source code is moved to .py (feature_importance/).
 ### Experiments
@@ -24,10 +29,9 @@ All the experiments are issued in the form of pretty self-explanatory jupyter no
 ### Outlier dimensions perform better than random features on probing tasks
 <p align="center"><img src="pics/Test_accuracy.png" width="700" /></p>
 
-To plot feature importance vs deviation from the mean (outlierness of the component) - run `./plot_methods.sh`.
-
 ### Several outlier dimensions with high feature importance for each task
 <p align="center"><img src="pics/BigramShift.png" width="700" /></p>
+To plot feature importance vs deviation from the mean (outlierness of the component) - run `./plot_methods.sh`.
 
 ### Few distinctive outlier dimensions with syntactic or semantic information
 <p align="center"><img src="pics/TaskIntersection.png" width="700" /></p>
