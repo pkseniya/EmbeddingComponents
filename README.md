@@ -27,8 +27,9 @@ All the experiments are issued in the form of pretty self-explanatory jupyter no
 
 - `notebooks/fvalue.ipynb` &ndash; getting feature importance of embeddings with ANOVA F-value [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/fvalue.ipynb)
 
-- To plot feature importance vs deviation from the mean (outlierness of the component) - run `./plot_methods.sh`.
+- `notebooks/one_feature_classification.ipynb` &ndash; getting accuracy of predictions with single embeddings' component [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/pkseniya/EmbeddingComponents/blob/main/notebooks/one_feature_classification.ipynb)
 
+- `plot_methods.sh` &ndash; plotting feature importance vs deviation from the mean (outlierness of the component)
 ## Results
 ### Outlier dimensions perform better than random features on probing tasks
 <p align="center"><img src="pics/Test_accuracy.png" width="700" /></p>
